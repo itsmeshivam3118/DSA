@@ -1,5 +1,5 @@
 //https://practice.geeksforgeeks.org/problems/diameter-of-binary-tree/1
-
+https://leetcode.com/problems/diameter-of-binary-tree/
 //https://www.youtube.com/watch?v=nHMQ33LZ6oA&list=PLDzeHZWIZsTryvtXdMr6rPh4IDexB5NIA&index=70&ab_channel=CodeHelp-byBabbar
 
 
@@ -27,5 +27,28 @@ class Solution {
     
     int diameter(Node* root) {
       return diameterFast(root).first;
+    }
+};
+
+// alitier better way
+//(leetcode format)
+class Solution {
+    public:
+   // int diameter = 0;
+    int ans(TreeNode* root,int &diameter){
+        if(!root)
+            return 0;
+        
+        int lh = ans(root -> left,diameter);
+        int rh = ans(root -> right,diameter);
+        
+        diameter = max(diameter,rh+lh);
+        return max(rh,lh)+1;
+    }
+
+    int diameterOfBinaryTree(TreeNode* root) {
+        int diameter = INT_MIN;
+        ans(root,diameter);
+        return diameter;
     }
 };
